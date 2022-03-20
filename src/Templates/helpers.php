@@ -15,7 +15,6 @@ if ( ! function_exists( 'get_component' ) ) {
 
 if ( ! function_exists( 'render_component' ) ) {
 	function render_component( string $path, array|null $variables = null ): void {
-		var_dump( trailingslashit( app()->templatePartDirectory() ) . $path );
 		get_template_part( trailingslashit( app()->templatePartDirectory() ) . $path, null, $variables );
 	}
 }
