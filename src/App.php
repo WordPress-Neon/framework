@@ -2,29 +2,39 @@
 
 namespace WPN;
 
-class App {
-	protected string $config_path = '';
-	protected static string $asset_path = 'assets';
-	protected static string $template_path = 'template-parts';
+use WPN\Exceptions\WPNInitializationException;
 
-	public function __construct() {
-	}
+final class App {
+	public string $template_path = '';
+	public string $asset_path = '';
 
-	public function init(): void {
+	/**
+	 * @throws WPNInitializationException
+	 */
+	public function init( string $config_path = '' ): self {
+		$config_path = $config_path ?? get_template_directory() . '/inc/config.php';
+
 		add_filter( 'show_admin_bar', fn() => false );
 
 		$this->disableFileEditing();
 
 		add_theme_support( 'post-thumbnails' );
 
-		if ( ! file_exists( $this->config_path ) ) {
-			return;
+		if ( ! file_exists( $config_path ) ) {
+			throw new WPNInitializationException( 'Unable to find config file' );
 		}
 
-		$config = require $this->config_path;
+		$config = require $config_path;
+
+		$this->template_path = $config['template_path'] ?? 'template-parts';
+		$this->asset_path    = $config['asset_path'] ?? 'assets';
 
 		self::registerPlugins( $config );
 		self::registerFeatures( $config );
+
+		add_filter( 'wpn_app', fn() => $this );
+
+		return $this;
 	}
 
 	protected function disableFileEditing(): self {
@@ -35,15 +45,15 @@ class App {
 		return $this;
 	}
 
-	public static function assetPath(): string {
-		return get_stylesheet_directory_uri() . static::$asset_path;
+	public function assetPath(): string {
+		return get_stylesheet_directory_uri() . $this->asset_path;
 	}
 
-	public static function templatePartDirectory(): string {
-		return static::$template_path;
+	public function templatePartDirectory(): string {
+		return $this->template_path;
 	}
 
-	public static function environment( string $environment ): bool {
+	public function environment( string $environment ): bool {
 		if ( $environment == 'local' ) {
 			return WP_DEBUG || str_contains( get_site_url(), 'localhost' );
 		}

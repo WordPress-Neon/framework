@@ -1,10 +1,8 @@
 <?php
 
-use WPN\App;
-
 if ( ! function_exists( 'get_component' ) ) {
 	function get_component( string $path, array|null $variables = null ): string {
-		$file = get_template_directory() . '/' . trailingslashit( App::templatePartDirectory() ) . $path . '.php';
+		$file = get_template_directory() . '/' . trailingslashit( app()->templatePartDirectory() ) . $path . '.php';
 		if ( $variables ) :
 			extract( $variables );
 		endif;
@@ -17,6 +15,7 @@ if ( ! function_exists( 'get_component' ) ) {
 
 if ( ! function_exists( 'render_component' ) ) {
 	function render_component( string $path, array|null $variables = null ): void {
-		get_template_part( trailingslashit( App::templatePartDirectory() ) . $path, null, $variables );
+		var_dump( trailingslashit( app()->templatePartDirectory() ) . $path );
+		get_template_part( trailingslashit( app()->templatePartDirectory() ) . $path, null, $variables );
 	}
 }

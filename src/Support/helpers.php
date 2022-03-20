@@ -7,3 +7,9 @@ if ( ! function_exists( 'asset_path' ) ) {
 		return trailingslashit( App::assetPath() ) . $path;
 	}
 }
+
+if ( ! function_exists( 'app' ) ) {
+	function app(): App {
+		return apply_filters( 'wpn_app', new App() );
+	}
+}
