@@ -27,7 +27,8 @@
       "WPN\\": "src/"
     },
     "files": [
-      "src/Templates/helpers.php"
+      "src/Templates/helpers.php",
+      "src/Support/helpers.php"
     ]
   },
   "minimum-stability": "dev"

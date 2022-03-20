@@ -4,9 +4,10 @@ namespace WPN;
 
 class App {
 	protected string $config_path = '';
+	protected static string $asset_path = 'assets';
+	protected static string $template_path = 'template-parts';
 
 	public function __construct() {
-		$this->init();
 	}
 
 	public function init(): void {
@@ -32,6 +33,14 @@ class App {
 		} );
 
 		return $this;
+	}
+
+	public static function assetPath(): string {
+		return get_stylesheet_directory_uri() . static::$asset_path;
+	}
+
+	public static function templatePartDirectory(): string {
+		return static::$template_path;
 	}
 
 	public static function environment( string $environment ): bool {
