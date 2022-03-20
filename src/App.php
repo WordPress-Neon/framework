@@ -1,6 +1,6 @@
 <?php
 
-namespace WPN\Support;
+namespace WPN;
 
 class App {
 	protected string $config_path = '';
