@@ -46,7 +46,7 @@ final class App {
 	}
 
 	public function assetPath(): string {
-		return get_stylesheet_directory_uri() . $this->asset_path;
+		return get_stylesheet_directory_uri() . '/' . $this->asset_path;
 	}
 
 	public function templatePartDirectory(): string {
