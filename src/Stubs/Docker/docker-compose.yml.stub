@@ -47,7 +47,7 @@ services:
       - '80:80'
     restart: 'no'
     volumes:
-      - ./:/var/www/html/wp-content/themes/wpn-theme
+      - ./src:/var/www/html/wp-content/themes/wpn-theme
       - ./wordpress:/var/www/html
     environment:
       WORDPRESS_DB_HOST: db:3306
