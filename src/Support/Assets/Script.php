@@ -2,7 +2,7 @@
 
 namespace WPN\Support\Assets;
 
-use WPN\Support\App;
+use WPN\App;
 use WPN\Support\Stringable;
 
 class Script {

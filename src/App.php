@@ -53,7 +53,7 @@ final class App {
 		return $this->template_path;
 	}
 
-	public function environment( string $environment ): bool {
+	public static function environment( string $environment ): bool {
 		if ( $environment == 'local' ) {
 			return WP_DEBUG || str_contains( get_site_url(), 'localhost' );
 		}
