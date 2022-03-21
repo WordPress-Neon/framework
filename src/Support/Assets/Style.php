@@ -10,7 +10,7 @@ class Style {
 		add_action( $admin ? 'admin_enqueue_scripts' : 'wp_enqueue_scripts', function () use ( $file ) {
 			wp_enqueue_style(
 				Stringable::slug( $file ),
-				get_stylesheet_directory_uri() . '/css/' . $file,
+				asset_path( $file ),
 				[],
 				App::environment( 'production' ) ? time() : false
 			);
