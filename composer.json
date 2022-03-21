@@ -29,9 +29,6 @@
     "files": [
       "src/Templates/helpers.php",
       "src/Support/helpers.php"
-    ],
-    "exclude-from-classmap": [
-      "src/Stubs"
     ]
   },
   "minimum-stability": "dev"
