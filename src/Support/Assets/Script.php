@@ -11,10 +11,12 @@ class Script {
 	) {
 	}
 
-	public function localize( string $object_name, array $data ) {
+	public function localize( string $object_name, array $data ): self {
 		add_action( 'wp_enqueue_scripts', function () use ( $object_name, $data ) {
 			wp_localize_script( $this->handle, $object_name, $data );
 		}, 200 );
+
+		return $this;
 	}
 
 	public static function ajaxData(): array {
