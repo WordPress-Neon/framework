@@ -1,6 +1,6 @@
 <?php
 
-namespace WPN\Support\Plugins;
+namespace WPN\Plugins;
 
 interface Plugin {
 	public function __invoke();

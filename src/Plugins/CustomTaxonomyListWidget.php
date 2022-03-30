@@ -1,9 +1,9 @@
 <?php
 
-namespace WPN\Support\Plugins;
+namespace WPN\Plugins;
 
 use WP_Widget;
-use WPN\Support\Plugins\Support\CustomTaxonomyListWalker;
+use WPN\Plugins\Support\CustomTaxonomyListWalker;
 use WPN\Support\Traits\RegistersWidget;
 
 class CustomTaxonomyListWidget extends WP_Widget {

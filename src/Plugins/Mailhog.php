@@ -1,6 +1,6 @@
 <?php
 
-namespace WPN\Support\Plugins;
+namespace WPN\Plugins;
 
 use WPN\Support\App;
 use WPN\Support\Traits\RegistersPlugin;

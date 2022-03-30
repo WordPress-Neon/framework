@@ -1,6 +1,6 @@
 <?php
 
-namespace WPN\Support\Plugins\Support;
+namespace WPN\Plugins\Support;
 
 use Walker;
 
