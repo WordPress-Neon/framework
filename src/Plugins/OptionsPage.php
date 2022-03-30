@@ -5,7 +5,7 @@ namespace WPN\Plugins;
 use WPN\Support\Stringable;
 use WPN\Support\Traits\RegistersPlugin;
 
-class OptionsPage implements Plugin {
+class OptionsPage implements PluginInterface {
 	use RegistersPlugin;
 
 	public function __invoke() {

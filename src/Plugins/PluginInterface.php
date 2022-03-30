@@ -2,7 +2,7 @@
 
 namespace WPN\Plugins;
 
-interface Plugin {
+interface PluginInterface {
 	public function __invoke();
 
 	public function register(): self;

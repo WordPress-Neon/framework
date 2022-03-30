@@ -5,7 +5,7 @@ namespace WPN\Plugins;
 use WPN\Support\App;
 use WPN\Support\Traits\RegistersPlugin;
 
-class Mailhog implements Plugin {
+class Mailhog implements PluginInterface {
 	use RegistersPlugin;
 
 	public function __invoke() {

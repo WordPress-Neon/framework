@@ -4,7 +4,7 @@ namespace WPN\Plugins;
 
 use WPN\Support\Traits\RegistersPlugin;
 
-class DisableComments implements Plugin {
+class DisableComments implements PluginInterface {
 	use RegistersPlugin;
 
 	public function __invoke() {

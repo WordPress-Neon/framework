@@ -4,7 +4,7 @@ namespace WPN\Plugins;
 
 use WPN\Support\Traits\RegistersPlugin;
 
-class SVGSupport implements Plugin {
+class SVGSupport implements PluginInterface {
 	use RegistersPlugin;
 
 	public function __invoke() {
