@@ -1,6 +1,6 @@
 <?php
 
-namespace WPN\Support\Ajax;
+namespace WPN\Ajax;
 
 class Response {
 	public function __construct( array $data ) {

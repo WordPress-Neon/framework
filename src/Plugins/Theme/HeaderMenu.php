@@ -1,6 +1,6 @@
 <?php
 
-namespace WPN\Support\Theme;
+namespace WPN\Plugins\Theme;
 
 use WPN\Support\Traits\RegistersThemeFeature;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace WPN\Support\Shortcodes;
+namespace WPN\Shortcodes;
 
 trait RegistersShortcode {
 	public string $handle;

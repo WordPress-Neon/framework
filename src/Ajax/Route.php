@@ -1,6 +1,6 @@
 <?php
 
-namespace WPN\Support\Ajax;
+namespace WPN\Ajax;
 
 class Route {
 	public static function registerRoutes( array $routes, bool $no_priv = true ) {

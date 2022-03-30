@@ -1,19 +1,17 @@
 <?php
 
-namespace WPN\Support\Shortcodes;
+namespace WPN\Shortcodes;
 
 use Closure;
 
-class Shortcode
-{
+class Shortcode {
 	use RegistersShortcode;
 
-	public static function register(string $handle, string|Closure $callback): void
-	{
-		(new self())->registerShortcode($handle);
+	public static function register( string $handle, string|Closure $callback ): void {
+		( new self() )->registerShortcode( $handle );
 
-		$callback_function = is_callable($callback) ? $callback : fn ($args) => (new $callback)($args);
+		$callback_function = is_callable( $callback ) ? $callback : fn( $args ) => ( new $callback )( $args );
 
-		add_shortcode($handle, $callback_function);
+		add_shortcode( $handle, $callback_function );
 	}
 }

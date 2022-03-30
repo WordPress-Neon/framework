@@ -1,6 +1,6 @@
 <?php
 
-namespace WPN\Support\Assets;
+namespace WPN\Assets;
 
 use WPN\App;
 use WPN\Support\Stringable;
