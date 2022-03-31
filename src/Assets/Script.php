@@ -32,7 +32,7 @@ class Script {
 				Stringable::slug( $file ),
 				asset_path( $file ),
 				[],
-				App::environment( 'production' ) ? time() : false
+				App::environment( 'production' ) ? filemtime( get_template_directory() . "/$file" ) : time()
 			);
 		}, 90 );
 
