@@ -31,6 +31,7 @@ final class App {
 
 		self::registerPlugins( $config );
 		self::registerFeatures( $config );
+		self::registerProviders( $config );
 
 		add_filter( 'wpn_app', fn() => $this );
 
@@ -63,6 +64,14 @@ final class App {
 		}
 
 		return false;
+	}
+
+	private static function registerProviders( array $config ): void {
+		if ( array_key_exists( 'providers', $config ) ) {
+			foreach ( $config['providers'] as $provider ) {
+				( new $provider() );
+			}
+		}
 	}
 
 	private static function registerPlugins( array $config ): void {
