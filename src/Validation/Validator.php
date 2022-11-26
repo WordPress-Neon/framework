@@ -1,6 +1,6 @@
 <?php
 
-namespace WPN\Support;
+namespace WPN\Validation;
 
 use DateTimeInterface;
 use Exception;
@@ -66,6 +66,10 @@ class Validator {
 		$date = date_parse( $value );
 
 		return checkdate( $date['month'], $date['day'], $date['year'] );
+	}
+
+	private static function int( mixed $value ): bool {
+		return is_int( $value );
 	}
 
 	private static function numeric( mixed $value ): bool {

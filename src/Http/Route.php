@@ -1,6 +1,6 @@
 <?php
 
-namespace WPN\Ajax;
+namespace WPN\Http;
 
 class Route {
 	public static function registerRoutes( array $routes, bool $no_priv = true ) {
@@ -9,9 +9,14 @@ class Route {
 		}
 	}
 
-	public static function create( string $name, string $callback, bool $nopriv = true ): void {
-		$callback = function () use ( $callback ) {
-			if ( ! wp_verify_nonce( $_POST['security'], 'theme-nonce' ) ) {
+	public static function create(
+		string $name,
+		string $callback,
+		bool $withoutNonce = true,
+		bool $nopriv = true
+	): void {
+		$callback = function () use ( $callback, $withoutNonce ) {
+			if ( ! $withoutNonce && ! wp_verify_nonce( $_POST['security'], 'theme-nonce' ) ) {
 				wp_die( '419' );
 			}
 			( new $callback() )();
