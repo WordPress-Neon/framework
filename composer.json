@@ -19,9 +19,6 @@
     "ext-mbstring": "*",
     "ext-openssl": "*"
   },
-  "provide": {
-    "psr/container-implementation": "1.1|2.0"
-  },
   "autoload": {
     "psr-4": {
       "WPN\\": "src/"
