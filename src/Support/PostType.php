@@ -8,6 +8,12 @@ class PostType {
 	) {
 	}
 
+	public function withoutYoast() {
+		add_action( 'add_meta_boxes', function () {
+			remove_meta_box( 'wpseo_meta', $this->name, 'normal' );
+		}, 100 );
+	}
+
 	public function taxonomy( string $name, array $args = [], bool $private = false ): self {
 		add_action( 'init', function () use ( $name, $args, $private ) {
 			register_taxonomy( Stringable::slug( $name ), Stringable::slug( $this->name ), [
@@ -30,7 +36,12 @@ class PostType {
 		return $this;
 	}
 
-	public static function register( string $name, array $supports = [], array $args = [], bool $private = false ): PostType {
+	public static function register(
+		string $name,
+		array $supports = [],
+		array $args = [],
+		bool $private = false
+	): PostType {
 		add_action( 'init', function () use ( $name, $private, $args, $supports ) {
 			$args = [
 				'label'               => $name,
