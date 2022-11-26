@@ -56,7 +56,7 @@ abstract class Request {
 			foreach ( $rules as $rule ) {
 				if ( ! $this->validator()->validate( $this->fields[ $key ], $rule ) ) {
 					$valid                    = false;
-					$invalid_fields[][ $key ] = sprintf( $this->messages()[ $rule ], ucfirst( $key ) );
+					$invalid_fields[][ $key ] = $this->get_invalid_message( $key, $rule );
 				}
 			}
 
@@ -69,6 +69,16 @@ abstract class Request {
 		}
 
 		return $validated_fields;
+	}
+
+	private function get_invalid_message( string $field, string $rule ): string {
+		$messages = $this->messages();
+
+		if ( array_key_exists( "$rule.$field", $messages ) ) {
+			return sprintf( $messages["$rule.$field"], $field );
+		}
+
+		return sprintf( $messages[ $rule ], $field );
 	}
 
 	protected function messages(): array {
@@ -92,7 +102,7 @@ abstract class Request {
 			}
 
 			if ( ! array_key_exists( $field, $this->fields ) ) {
-				$required_fields_not_set[ $field ][] = sprintf( $this->messages()['required'], ucfirst( $field ) );
+				$required_fields_not_set[ $field ][] = $this->get_invalid_message( $field, 'required' );
 			}
 		}
 
