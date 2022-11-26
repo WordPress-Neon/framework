@@ -12,7 +12,7 @@ class Route {
 	public static function create(
 		string $name,
 		string $callback,
-		bool $withoutNonce = true,
+		bool $withoutNonce = false,
 		bool $nopriv = true
 	): void {
 		$callback = function () use ( $callback, $withoutNonce ) {
