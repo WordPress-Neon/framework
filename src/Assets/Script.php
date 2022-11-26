@@ -21,7 +21,7 @@ class Script {
 
 	public static function ajaxData(): array {
 		return [
-			'nonce'   => wp_create_nonce( 'theme-nonce' ),
+			'token'   => wp_create_nonce( 'theme-nonce' ),
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
 		];
 	}
