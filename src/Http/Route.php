@@ -16,7 +16,7 @@ class Route {
 		bool $nopriv = true
 	): void {
 		$callback = function () use ( $callback, $withoutNonce ) {
-			if ( ! $withoutNonce && ! wp_verify_nonce( $_POST['security'], 'theme-nonce' ) ) {
+			if ( ! $withoutNonce && ! wp_verify_nonce( $_REQUEST['_token'], 'theme-nonce' ) ) {
 				wp_die( '419' );
 			}
 			( new $callback() )();
