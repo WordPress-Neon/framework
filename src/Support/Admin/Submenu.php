@@ -2,6 +2,7 @@
 
 namespace WPN\Support\Admin;
 
+use WPN\Exceptions\WPNInvalidCoreMenuException;
 use WPN\Support\Stringable;
 use Closure;
 
@@ -25,28 +26,17 @@ class Submenu {
 		}, 20 );
 	}
 
+	/**
+	 * @throws WPNInvalidCoreMenuException
+	 */
 	public static function core(
 		string $core_menu,
 		string $title,
 		string|Closure $callback,
 		string $capability = 'install_plugins'
 	): void {
-		$core_menus = [
-			'dashboard',
-			'posts',
-			'media',
-			'pages',
-			'comments',
-			'theme',
-			'plugins',
-			'users',
-			'management',
-			'options',
-			'links'
-		];
-
-		if ( ! in_array( $core_menu, $core_menus ) ) {
-			return;
+		if ( ! is_callable( "add_{$core_menu}_page" ) ) {
+			throw new WPNInvalidCoreMenuException( 'Invalid core menu' );
 		}
 
 		add_action( 'admin_menu', function () use ( $core_menu, $title, $capability, $callback ) {
