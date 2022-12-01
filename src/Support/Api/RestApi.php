@@ -22,7 +22,7 @@ class RestApi {
 		array $params = [],
 		string|Closure $middleware = DefaultMiddleware::class
 	) {
-		$callback            = static::middleware_callback( $callback );
+		$callback            = static::callback( $callback );
 		$middleware_callback = static::middleware_callback( $middleware );
 		$args                = static::get_args_from_params( $params );
 
