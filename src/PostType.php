@@ -1,6 +1,8 @@
 <?php
 
-namespace WPN\Support;
+namespace WPN;
+
+use WPN\Support\Stringable;
 
 class PostType {
 	public function __construct(
@@ -8,10 +10,12 @@ class PostType {
 	) {
 	}
 
-	public function withoutYoast() {
+	public function withoutYoast(): self {
 		add_action( 'add_meta_boxes', function () {
 			remove_meta_box( 'wpseo_meta', $this->name, 'normal' );
 		}, 100 );
+
+		return $this;
 	}
 
 	public function taxonomy( string $name, array $args = [], bool $private = false ): self {
@@ -38,7 +42,7 @@ class PostType {
 
 	public static function register(
 		string $name,
-		array $supports = [],
+		array $supports = [ 'title' ],
 		array $args = [],
 		bool $private = false
 	): PostType {
@@ -50,7 +54,6 @@ class PostType {
 				'hierarchical'        => false,
 				'description'         => '',
 				'supports'            => [
-					'title',
 					...$supports,
 				],
 				'show_ui'             => true,
