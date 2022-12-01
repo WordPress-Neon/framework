@@ -24,4 +24,41 @@ class Submenu {
 			);
 		}, 20 );
 	}
+
+	public static function core(
+		string $core_menu,
+		string $title,
+		string|Closure $callback,
+		string $capability = 'install_plugins'
+	): void {
+		$core_menus = [
+			'dashboard',
+			'posts',
+			'media',
+			'pages',
+			'comments',
+			'theme',
+			'plugins',
+			'users',
+			'management',
+			'options',
+			'links'
+		];
+
+		if ( ! in_array( $core_menu, $core_menus ) ) {
+			return;
+		}
+
+		add_action( 'admin_menu', function () use ( $core_menu, $title, $capability, $callback ) {
+			call_user_func( "add_{$core_menu}_page",
+				$title,
+				$title,
+				$capability,
+				Stringable::slug( $title ),
+				is_callable( $callback ) ? $callback : function () use ( $callback ) {
+					return ( new $callback )();
+				}
+			);
+		} );
+	}
 }
