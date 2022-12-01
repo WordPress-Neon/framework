@@ -13,3 +13,15 @@ if ( ! function_exists( 'app' ) ) {
 		return apply_filters( 'wpn_app', new App() );
 	}
 }
+
+if ( ! defined( 'SECONDS_IN_AN_HOUR' ) ) {
+	define( 'SECONDS_IN_AN_HOUR', 3600 );
+}
+
+if ( ! defined( 'SECONDS_IN_A_DAY' ) ) {
+	define( 'SECONDS_IN_A_DAY', 86400 );
+}
+
+if ( ! defined( 'SECONDS_IN_A_WEEK' ) ) {
+	define( 'SECONDS_IN_A_WEEK', 604800 );
+}
