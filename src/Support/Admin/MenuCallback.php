@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support\Admin;
+namespace WPN\Support\Admin;
 
 interface MenuCallback {
 	public function __invoke(): void;
