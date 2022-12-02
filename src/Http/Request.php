@@ -30,6 +30,10 @@ abstract class Request {
 		unset( $this->fields['security'] );
 
 		foreach ( $this->fields as $key => $value ) {
+			if ( is_array( $value ) ) {
+				$valid[ $key ] = rest_sanitize_array( $value );
+				continue;
+			}
 			$valid[ $key ] = sanitize_text_field( $value );
 		}
 
