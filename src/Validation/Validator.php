@@ -12,6 +12,10 @@ class Validator {
 			: $method( $value );
 	}
 
+	private static function array( mixed $value ): bool {
+		return is_array( $value );
+	}
+
 	private static function email( mixed $value ): bool {
 		return filter_var( $value, FILTER_VALIDATE_EMAIL );
 	}
