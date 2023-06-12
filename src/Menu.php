@@ -13,7 +13,8 @@ class Menu {
 			if ( ! empty( $item->menu_item_parent ) ) {
 				continue;
 			}
-			$this->menu_items[ $item->ID ]             = array();
+			$this->menu_items[ $item->ID ] = apply_filters( 'wpn_menu_fields', array(), $item->ID );
+
 			$this->menu_items[ $item->ID ]['ID']       = $item->ID;
 			$this->menu_items[ $item->ID ]['title']    = $item->title;
 			$this->menu_items[ $item->ID ]['url']      = $item->url;
@@ -25,7 +26,8 @@ class Menu {
 			if ( ! $item->menu_item_parent ) {
 				continue;
 			}
-			$submenus[ $item->ID ]                                                = array();
+			$submenus[ $item->ID ] = apply_filters( 'wpn_submenu_fields', array(), $item->ID );
+
 			$submenus[ $item->ID ]['ID']                                          = $item->ID;
 			$submenus[ $item->ID ]['title']                                       = $item->title;
 			$submenus[ $item->ID ]['url']                                         = $item->url;
