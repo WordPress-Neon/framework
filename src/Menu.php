@@ -7,7 +7,7 @@ class Menu {
 	protected array $menu_items = [];
 
 	public function __construct( protected string $menu_id ) {
-		$this->raw_menu_items = wp_get_nav_menu_items( $this->menu_id );
+		$this->raw_menu_items = wp_get_nav_menu_items( $this->menu_id ) ?: [];
 
 		foreach ( $this->raw_menu_items as $item ) {
 			if ( ! empty( $item->menu_item_parent ) ) {
