@@ -16,8 +16,6 @@ final class App
     {
         $config_path = $config_path ?? get_template_directory().'/inc/config.php';
 
-        $this->disableFileEditing();
-
         add_theme_support('post-thumbnails');
 
         if ( ! file_exists($config_path)) {
@@ -38,7 +36,7 @@ final class App
         return $this;
     }
 
-    protected function disableFileEditing(): self
+    public function disableFileEditing(): self
     {
         add_action('init', function () {
             define('DISALLOW_FILE_EDIT', true);
