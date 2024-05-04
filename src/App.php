@@ -11,6 +11,11 @@ final class App
     public string $asset_path = '';
 
     /**
+     * @var array<string, mixed>
+     */
+    protected array $config;
+
+    /**
      * @throws WPNInitializationException
      */
     public function init(string $config_path = ''): self
@@ -24,26 +29,24 @@ final class App
         }
 
         try {
-            $config = require $config_path;
+            $this->config = require $config_path;
         } catch (Throwable $e) {
             trigger_error("Config file not found at: $config_path", E_USER_WARNING);
-            $config = [];
+            $this->config = [];
         }
 
-        $this->template_path = $config['template_path'] ?? 'template-parts';
-        $this->asset_path    = $config['asset_path'] ?? 'assets';
+        $this->template_path = $this->config['template_path'] ?? 'template-parts';
+        $this->asset_path    = $this->config['asset_path'] ?? 'assets';
 
-        if (array_key_exists('disable_file_editing', $config) && $config['disable_file_editing']) {
+        if (array_key_exists('disable_file_editing', $this->config) && $this->config['disable_file_editing']) {
             $this->disableFileEditing();
         }
 
-        self::registerPlugins($config);
-        self::registerFeatures($config);
-        self::registerProviders($config);
-
         add_filter('wpn_app', fn() => $this);
 
-        return $this;
+        return $this->registerPlugins()
+                    ->registerFeatures()
+                    ->registerProviders();
     }
 
     public function disableFileEditing(): self
@@ -78,31 +81,31 @@ final class App
         return false;
     }
 
-    private static function registerProviders(array $config): void
+    private function registerProviders(): App
     {
-        if (array_key_exists('providers', $config)) {
-            foreach ($config['providers'] as $provider) {
-                (new $provider());
-            }
+        foreach ($this->config['providers'] ?? [] as $provider) {
+            (new $provider());
         }
+
+        return $this;
     }
 
-    private static function registerPlugins(array $config): void
+    private function registerPlugins(): App
     {
-        if (array_key_exists('plugins', $config)) {
-            foreach ($config['plugins'] as $plugin => $settings) {
-                $registered_plugin = is_string($plugin) ? $plugin : $settings;
-                (new $registered_plugin)->register($config['plugins'][$registered_plugin] ?? []);
-            }
+        foreach ($this->config['plugins'] ?? [] as $plugin => $settings) {
+            $registered_plugin = is_string($plugin) ? $plugin : $settings;
+            (new $registered_plugin)->register($this->config['plugins'][$registered_plugin] ?? []);
         }
+
+        return $this;
     }
 
-    private static function registerFeatures(array $config): void
+    private function registerFeatures(): App
     {
-        if (array_key_exists('features', $config)) {
-            foreach ($config['features'] as $feature) {
-                (new $feature)->register();
-            }
+        foreach ($this->config['features'] ?? [] as $feature) {
+            (new $feature)->register();
         }
+
+        return $this;
     }
 }
