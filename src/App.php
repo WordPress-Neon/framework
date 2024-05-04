@@ -2,6 +2,7 @@
 
 namespace WPN;
 
+use Throwable;
 use WPN\Exceptions\WPNInitializationException;
 
 final class App
@@ -22,7 +23,11 @@ final class App
             throw new WPNInitializationException('Unable to find config file');
         }
 
-        $config = require $config_path;
+        try {
+            $config = require $config_path;
+        } catch (Throwable $e) {
+            $config = [];
+        }
 
         $this->template_path = $config['template_path'] ?? 'template-parts';
         $this->asset_path    = $config['asset_path'] ?? 'assets';
