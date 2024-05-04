@@ -27,6 +27,10 @@ final class App
         $this->template_path = $config['template_path'] ?? 'template-parts';
         $this->asset_path    = $config['asset_path'] ?? 'assets';
 
+        if (array_key_exists('disable_file_editing', $config) && $config['disable_file_editing']) {
+            $this->disableFileEditing();
+        }
+
         self::registerPlugins($config);
         self::registerFeatures($config);
         self::registerProviders($config);
