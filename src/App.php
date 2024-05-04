@@ -26,6 +26,7 @@ final class App
         try {
             $config = require $config_path;
         } catch (Throwable $e) {
+            trigger_error("Config file not found at: $config_path", E_USER_WARNING);
             $config = [];
         }
 
